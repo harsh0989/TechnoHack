@@ -1,0 +1,22 @@
+.alertBtn:hover {
+    background-color: red !important;
+}
+
+.DrawerDiv{
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    width: 80vw;
+    height: 100vh;
+    padding-top: 15%;
+}
+
+.NotDrawer{
+    display: none;
+}
+
+@media (min-width:'900px'){
+    .DrawerDiv{
+        display: none;
+    }
+}
