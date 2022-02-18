@@ -2,18 +2,23 @@ import './App.css';
 import Splashpage from './pages/Splashpage'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
-import Navbar from './components/Navbar';
+import SignUp from './pages/SignUp';
+import ContactList from './pages/ContactList';
+import GMap from './pages/GMap';
+
 function App() {
   return (
-    
-    <Router>
-      <Navbar style={{position:'absolute',zIndex:'1'}} />
-      <Routes>
-        <Route exact path='/' element={<Splashpage />} />
-        <Route exact path='/login' element={<Login />} />
-      </Routes>
-    </Router>
-
+    <>
+      <ContactList />
+      {/* <Router>
+        <Routes>
+          <Route exact path='/' element={<Splashpage />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/signup' element={<SignUp />} />
+          <Route exact path='/contactlist' element={<ContactList/>} />
+        </Routes>
+      </Router> */}
+    </>
   )
 
 }
