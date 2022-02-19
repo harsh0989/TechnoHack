@@ -9,7 +9,18 @@ import Safe from '../images/Safe.png'
 import '../css/Dashboard.css'
 import MenuIcon from '@mui/icons-material/Menu'
 import GMap from './GMap'
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router'
+
 const Dashboard = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const first_name = location.state.first_name;
+    useEffect(() => {
+        if (!first_name) {
+            navigate('/login')
+        }
+    })
     let [toggle, setToggle] = useState(false)
     const toggleOpen = () => {
         const toggleFinal = toggle ? false : true;
@@ -106,7 +117,7 @@ const Dashboard = () => {
                         <Button className='alertBtn' style={{ width: '100%', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '3px solid #E72222', color: 'white', backgroundColor: 'rgba(231, 34, 34, 0.63)' }}>ALERT</Button>
                     </Grid>
                 </Grid>
-                <Grid item xs={9} md={9} sx={{ backgroundColor: '#F1F1F1', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Grid item xs={9} md={9} sx={{ backgroundColor: '#F1F1F1', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ width: '90%', height: '90%' }}>
                         <GMap />
                     </div>

@@ -13,7 +13,7 @@ const markerIcon = new L.Icon({
 
 function GMap() {
     const mapRef = useRef();
-    const [center, setCenter] = useState({ lon: '', lat: '' })
+    const [center, setCenter] = useState({ lat: '', lon: '' })
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -30,7 +30,7 @@ function GMap() {
     return (
         <MapContainer
             center={center}
-            zoom={10}
+            zoom={2}
             style={{ width: '100%', height: '100%' }}
             ref={mapRef}
         >

@@ -11,10 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../images/logo2.png'
+import { useNavigate } from 'react-router';
 
 const pages = ['News', 'Nearby safe spots'];
 
 function SignUp() {
+    const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -141,7 +143,7 @@ function SignUp() {
                                 </Grid>
                             </Grid>
                             <Grid item>
-                                <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Already have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }}>Login</span></p>
+                                <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Already have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }} onClick={() => navigate('/login')}>Login</span></p>
                             </Grid>
                             <Grid item style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }}>Sign Up</Button>

@@ -1,5 +1,5 @@
 import { Button, Grid } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import TextField from "@mui/material/TextField";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,12 +11,55 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import logo from '../images/logo2.png'
+import { useNavigate } from 'react-router';
+import { Link } from "react-router-dom";
 
 const pages = ['News', 'Nearby safe spots'];
 
 const Login = () => {
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [list, setList] = useState({ number: '', password: '' });
+  const [first_name, setFirstName] = useState('');
+
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setList({ ...list, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    if (list.number && list.password) {
+      var myHeaders = new Headers();
+
+      var formdata = new FormData();
+      formdata.append("phone_no", list.number);
+      formdata.append("password", list.password);
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch("http://safestree.herokuapp.com/api/login/", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log(result.first_name);
+          if (result.first_name) {
+            setFirstName(result.first_name)
+            navigate('/dashboard')
+          }
+          else {
+            navigate('/login')
+            alert('Invalid Credentials')
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -115,20 +158,20 @@ const Login = () => {
                   <Grid item style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', rowGap: '1.5rem' }}>
                     <Grid container spacing={3} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', flexDirection: 'column' }}>
                       <Grid item style={{ width: '100%' }}>
-                        <TextField required label="Email" autoFocus style={{ width: '100%' }} />
+                        <TextField required label="Phone Number" id='number' name='number' value={list.number} autoFocus style={{ width: '100%' }} onChange={handleChange} />
                       </Grid>
                       <Grid item style={{ width: '100%' }}>
-                        <TextField required label="Email" autoFocus style={{ width: '100%' }} />
+                        <TextField required label="Password" id='password' name='password' value={list.password} autoFocus style={{ width: '100%' }} onChange={handleChange} />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-                <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Don't have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }}>Sign Up</span></p>
+                <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Don't have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }} onClick={() => navigate('/signup')}>Sign Up</span></p>
               </Grid>
               <Grid item style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }}>Sign In</Button>
+                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }} onClick={handleSubmit}>Sign Up</Button>
               </Grid>
             </Grid>
           </Grid>
