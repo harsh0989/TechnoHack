@@ -9,6 +9,7 @@ import GMap from './pages/GMap';
 import Dashboard from './pages/Dashboard';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
+import News from './pages/News';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </Router>
+      
     </>
   )
 
