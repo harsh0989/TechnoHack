@@ -273,7 +273,7 @@ function ContactList() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            <h5 style={{ textAlign: 'right', color: '#E02768', cursor: 'pointer' }} onClick={postContactList}>Confirm & Proceed</h5>
+                            <h5 style={{ textAlign: 'right', color: '#E02768' }} onClick={postContactList}>Confirm & Proceed</h5>
                         </CardContent>
                     </Card>
                 </div>
