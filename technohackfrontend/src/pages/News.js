@@ -35,7 +35,7 @@ function News() {
                 {
                     news.map((article) => {
                         return <>
-                            <Grid item md={4}>
+                            <Grid spacing={6} item md={6}>
                                 <Card sx={{ display: 'flex' }}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                         <CardContent sx={{ flex: '1 0 auto' }}>

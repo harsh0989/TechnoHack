@@ -12,7 +12,7 @@ import GMap from './GMap'
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 import 'leaflet/dist/leaflet.css';
-
+import DashboardComp from '../components/DashboardComp'
 
 const Dashboard = () => {
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className={toggle ? 'DrawerDiv' : 'NotDrawer'}  >
+            <div className={toggle ? 'DrawerDiv' : 'NotDrawer'} >
                 <Grid container className='Drawer' md={3} sx={{ backgroundColor: 'white', width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '3%' }} >
                     <Grid item style={{ width: '100%' }}>
                         <Grid container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
@@ -69,7 +69,7 @@ const Dashboard = () => {
 
                 </Grid>
             </div>
-            <Grid container style={{ position: 'relative' }}>
+            <Grid container style={{ position: 'absolute' }}>
                 <Grid item className='Drawer' md={3} sx={{ backgroundColor: 'white', width: '100%', minHeight: '100vh', display: { xs: 'none', md: 'flex' }, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '3%' }} >
                     <Grid item>
                         <img src={logo} alt="" srcset="" />
@@ -118,19 +118,7 @@ const Dashboard = () => {
                     </div>
                 </Grid>
             </Grid>
-            <AppBar sx={{ display: { xs: 'flex', md: 'none' }, backgroundColor: 'transparent', boxShadow: 'none', justifyContent: 'space-between', padding: '2%' }}>
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <IconButton size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2, color: '#E02768' }}
-                        onClick={toggleOpen}>
-                        <MenuIcon />
-                    </IconButton>
-                    <img src={logo} alt='img' />
-                </Toolbar>
-            </AppBar>
+            <DashboardComp style={{ display: { xs: 'flex' } }} />
         </>
 
     )
