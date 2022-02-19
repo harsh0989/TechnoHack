@@ -13,14 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 
 const Dashboard = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const first_name = location.state.first_name;
-    useEffect(() => {
-        if (!first_name) {
-            navigate('/login')
-        }
-    })
+
     let [toggle, setToggle] = useState(false)
     const toggleOpen = () => {
         const toggleFinal = toggle ? false : true;

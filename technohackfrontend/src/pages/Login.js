@@ -161,7 +161,7 @@ const Login = () => {
                         <TextField required label="Phone Number" id='number' name='number' value={list.number} autoFocus style={{ width: '100%' }} onChange={handleChange} />
                       </Grid>
                       <Grid item style={{ width: '100%' }}>
-                        <TextField required label="Password" id='password' name='password' value={list.password} autoFocus style={{ width: '100%' }} onChange={handleChange} />
+                        <TextField type='password' required label="Password" id='password' name='password' value={list.password} autoFocus style={{ width: '100%' }} onChange={handleChange} />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -171,7 +171,7 @@ const Login = () => {
                 <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Don't have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }} onClick={() => navigate('/signup')}>Sign Up</span></p>
               </Grid>
               <Grid item style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }} onClick={handleSubmit}>Sign Up</Button>
+                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }} onClick={handleSubmit}>Sign In</Button>
               </Grid>
             </Grid>
           </Grid>
