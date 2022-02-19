@@ -24,9 +24,12 @@ function App() {
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/contactlist' element={<ContactList />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/news' element={<News />} />
+
+          <Route path='/news' element={<News />}/>
         </Routes>
       </Router>
+      {/* <GuardiansTracker/> */}
+
 
     </>
   )

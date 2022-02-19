@@ -33,7 +33,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     if (list.number && list.password) {
       var myHeaders = new Headers();
-
+localStorage.setItem('phone_no',list.number)
       var formdata = new FormData();
       formdata.append("phone_no", list.number);
       formdata.append("password", list.password);
@@ -121,11 +121,12 @@ const Login = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" onClick={() => { navigate('/news') }}>News</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" onClick={() => { navigate('/safetyspots') }}>Nearby Safe Spots</Typography>
+                </MenuItem>
               </Menu>
             </Box>
             <Typography
@@ -137,15 +138,12 @@ const Login = () => {
               <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
-              ))}
+            <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" onClick={() => { navigate('/news') }}>News</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" onClick={() => { navigate('/safetyspots') }}>Nearby Safe Spots</Typography>
+              </MenuItem>
             </Box>
           </Toolbar>
         </Container>
