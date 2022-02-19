@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Button, Grid, IconButton, Toolbar } from '@mui/material'
 import { Typography } from '@mui/material'
-import WrappedMap from '../components/GMap'
-import GMap from '../components/GMap'
 import logo from '../images/logo3.png'
 import SafetyAudit from '../images/SafetyAudit.png'
 import LOC from '../images/Loc.png'
@@ -10,148 +8,117 @@ import News from '../images/News.png'
 import Safe from '../images/Safe.png'
 import '../css/Dashboard.css'
 import MenuIcon from '@mui/icons-material/Menu'
+import GMap from './GMap'
 const Dashboard = () => {
     let [toggle, setToggle] = useState(false)
-    const toggleOpen=() => {
+    const toggleOpen = () => {
         const toggleFinal = toggle ? false : true;
         setToggle(toggleFinal)
         console.log(setToggle)
-        
     }
+
+
+
     return (
         <>
-        <div className={toggle?'DrawerDiv' : 'NotDrawer'} >
-        <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} columns={12} rowGap={2}>
-                        <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} rowSpacing={10}>
-                            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                                <Button sx={{ backgroundColor: '#F1F1F1', width: '10vw', height: '15vh' }}>
-                                    <img src={SafetyAudit} alt='img' />
-                                </Button>
-                                <Typography sx={{ fontFamily: 'poppins', fontWeight: '500', fontSize: "15px", lineHeight: '40px' }}>Safety Audit</Typography>
-                            </Grid>
-                            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                                <Button sx={{ backgroundColor: '#F1F1F1', width: '10vw', height: '15vh' }}>
-                                    <img src={LOC} alt='img' />
-                                </Button>
-                                <Typography sx={{ fontFamily: 'poppins', fontWeight: '500', fontSize: "15px", lineHeight: '40px' }}>Share Location</Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={1} />
-                        <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} xs={10}>
-                            <Button sx={{ backgroundColor: '#F1F1F1' }}>
-                                <Grid container sx={{ display: 'flex', alignItems: 'center' }} columnGap={2} columns={14}>
-                                    <Grid item xs={3} sx={{ backgroundColor: 'white', width: 'auto', padding: '10px', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <img src={News} alt='img' />
+            <div className={toggle ? 'DrawerDiv' : 'NotDrawer'}  >
+                <Grid container className='Drawer' md={3} sx={{ backgroundColor: 'white', width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '3%' }} >
+                    <Grid item style={{ width: '100%' }}>
+                        <Grid container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Grid item style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
+                                <Grid container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                                    <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: '#F1F1F1', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={SafetyAudit} />
                                     </Grid>
-                                    <Grid item xs={9}>
-                                        {/* <Grid container sx={{ display: 'flex', flexDirection: 'column' }}>
-                                    <Grid item>
-                                        <Typography sx={{ fontFamily: 'Poppins', fontWeight: '600', fontSize: '15px' }}>Daily News</Typography>
-                                    </Grid>
-                                    <Grid item><Typography sx={{ fontFamily: 'Poppins', fontWeight: '400', fontSize: '10px' }}>Keep yourself updated by the daily the daily incidences happening around you</Typography></Grid>
-                                </Grid> */}
-                                        <h2 style={{ fontSize: '15px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '600' }}>Daily News</h2>
-                                        <p style={{ fontSize: '10px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '400' }}>Keep yourself updated by the daily the daily incidences happening around you</p>
+                                    <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: '#F1F1F1', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={LOC} width='50px' />
                                     </Grid>
                                 </Grid>
-                            </Button>
-                        </Grid>
-                        <Grid item xs={1} />
-                        <Grid item xs={1} />
-                        <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} xs={10}>
-                            <Button sx={{ backgroundColor: '#F1F1F1' }}>
-                                <Grid container sx={{ display: 'flex', alignItems: 'center' }} columnGap={2} columns={14}>
-                                    <Grid item xs={3} sx={{ backgroundColor: 'white', width: 'auto', padding: '10px', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <img src={Safe} />
+                                <Grid container style={{ backgroundColor: '#F1F1F1', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '6px', borderRadius: '3.5px', marginTop: '10%' }}>
+                                    <Grid item md={4} xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: 'white', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={News} width='50px' />
                                     </Grid>
-                                    <Grid item xs={7}>
-                                        <h2 style={{ fontSize: '15px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '600' }}>Nearby Safe spots</h2>
-                                        <p style={{ fontSize: '10px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '400' }}>Find nearby NGO’s and Police Stations </p>
+                                    <Grid item md={1} xs={1}></Grid>
+                                    <Grid item md={7} xs={7}>
+                                        <h4 style={{ margin: '0', padding: '0' }}>Daily News</h4>
+                                        <p style={{ fontSize: '0.7em' }}>Keep yourself updated by the daily the daily incidences happening around you</p>
                                     </Grid>
-                                    <Grid item xs={1} />
                                 </Grid>
-                            </Button>
+                                <Grid container style={{ backgroundColor: '#F1F1F1', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '6px', borderRadius: '3.5px', marginTop: '10%' }}>
+                                    <Grid item md={4} xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: 'white', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={Safe} width='50px' />
+                                    </Grid>
+                                    <Grid item md={1} xs={1}></Grid>
+                                    <Grid item md={7} xs={7}>
+                                        <h4 style={{ margin: '0', padding: '0' }}>Nearby safe spots</h4>
+                                        <p style={{ fontSize: '0.7em' }}>Find nearby NGO’s and Police Stations</p>
+                                    </Grid>
+                                </Grid>
+                                <Grid item style={{ display: 'flex', width: '100%' }}>
+                                    <Button className='alertBtn' style={{ width: '100%', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '3px solid #E72222', color: 'white', backgroundColor: 'rgba(231, 34, 34, 0.63)' }}>ALERT</Button>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={1} />
-                        <Button className='alertBtn' sx={{ background: 'rgba(231, 34, 34, 0.63)', border: '4px solid #FF0000', borderRadius: '7px', width: '85%', fontFamily: 'poppins', color: 'white' }}>Alert</Button>
                     </Grid>
-        </div>
-            <Grid container  style={{position:'relative'}}>
-                <Grid item className='Drawer' md={3} sx={{ backgroundColor: 'white', width: '100%', minHeight: '100vh', paddingTop: '2vh', display:{xs:'none', md:'flex'} }} >
-                    <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} columns={12} rowGap={2}>
-                        <Grid item><img src={logo} alt='img' /></Grid>
-                        <Grid container sx={{ display: 'flex', justifyContent: 'space-evenly' }} rowSpacing={10}>
-                            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                                <Button sx={{ backgroundColor: '#F1F1F1', width: '10vw', height: '15vh' }}>
-                                    <img src={SafetyAudit} alt='img' />
-                                </Button>
-                                <Typography sx={{ fontFamily: 'poppins', fontWeight: '500', fontSize: "15px", lineHeight: '40px' }}>Safety Audit</Typography>
-                            </Grid>
-                            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                                <Button sx={{ backgroundColor: '#F1F1F1', width: '10vw', height: '15vh' }}>
-                                    <img src={LOC} alt='img' />
-                                </Button>
-                                <Typography sx={{ fontFamily: 'poppins', fontWeight: '500', fontSize: "15px", lineHeight: '40px' }}>Share Location</Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={1} />
-                        <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} xs={10}>
-                            <Button sx={{ backgroundColor: '#F1F1F1' }}>
-                                <Grid container sx={{ display: 'flex', alignItems: 'center' }} columnGap={2} columns={14}>
-                                    <Grid item xs={3} sx={{ backgroundColor: 'white', width: 'auto', padding: '10px', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <img src={News} alt='img' />
+
+                </Grid>
+            </div>
+            <Grid container style={{ position: 'relative' }}>
+                <Grid item className='Drawer' md={3} sx={{ backgroundColor: 'white', width: '100%', minHeight: '100vh', display: { xs: 'none', md: 'flex' }, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', padding: '3%' }} >
+                    <Grid item>
+                        <img src={logo} alt="" srcset="" />
+                    </Grid>
+                    <Grid item style={{ width: '100%' }}>
+                        <Grid container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Grid item style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
+                                <Grid container style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                                    <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: '#F1F1F1', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={SafetyAudit} />
                                     </Grid>
-                                    <Grid item xs={9}>
-                                        {/* <Grid container sx={{ display: 'flex', flexDirection: 'column' }}>
-                                    <Grid item>
-                                        <Typography sx={{ fontFamily: 'Poppins', fontWeight: '600', fontSize: '15px' }}>Daily News</Typography>
-                                    </Grid>
-                                    <Grid item><Typography sx={{ fontFamily: 'Poppins', fontWeight: '400', fontSize: '10px' }}>Keep yourself updated by the daily the daily incidences happening around you</Typography></Grid>
-                                </Grid> */}
-                                        <h2 style={{ fontSize: '15px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '600' }}>Daily News</h2>
-                                        <p style={{ fontSize: '10px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '400' }}>Keep yourself updated by the daily the daily incidences happening around you</p>
+                                    <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: '#F1F1F1', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={LOC} width='50px' />
                                     </Grid>
                                 </Grid>
-                            </Button>
-                        </Grid>
-                        <Grid item xs={1} />
-                        <Grid item xs={1} />
-                        <Grid item style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} xs={10}>
-                            <Button sx={{ backgroundColor: '#F1F1F1' }}>
-                                <Grid container sx={{ display: 'flex', alignItems: 'center' }} columnGap={2} columns={14}>
-                                    <Grid item xs={3} sx={{ backgroundColor: 'white', width: 'auto', padding: '10px', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                        <img src={Safe} />
+                                <Grid container style={{ backgroundColor: '#F1F1F1', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '6px', borderRadius: '3.5px', marginTop: '10%' }}>
+                                    <Grid item md={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: 'white', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={News} width='50px' />
                                     </Grid>
-                                    <Grid item xs={7}>
-                                        <h2 style={{ fontSize: '15px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '600' }}>Nearby Safe spots</h2>
-                                        <p style={{ fontSize: '10px', textAlign: 'left', color: 'black', fontFamily: 'Poppins', fontWeight: '400' }}>Find nearby NGO’s and Police Stations </p>
+                                    <Grid item md={1}></Grid>
+                                    <Grid item md={7}>
+                                        <h4 style={{ margin: '0', padding: '0' }}>Daily News</h4>
+                                        <p style={{ fontSize: '0.7em' }}>Keep yourself updated by the daily the daily incidences happening around you</p>
                                     </Grid>
-                                    <Grid item xs={1} />
                                 </Grid>
-                            </Button>
+                                <Grid container style={{ backgroundColor: '#F1F1F1', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '6px', borderRadius: '3.5px', marginTop: '10%' }}>
+                                    <Grid item md={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '10%', backgroundColor: 'white', borderRadius: '3.5px', width: '100px', height: '100px' }}>
+                                        <img src={Safe} width='50px' />
+                                    </Grid>
+                                    <Grid item md={1}></Grid>
+                                    <Grid item md={7}>
+                                        <h4 style={{ margin: '0', padding: '0' }}>Nearby safe spots</h4>
+                                        <p style={{ fontSize: '0.7em' }}>Find nearby NGO’s and Police Stations</p>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={1} />
-                        <Button className='alertBtn' sx={{ background: 'rgba(231, 34, 34, 0.63)', border: '4px solid #FF0000', borderRadius: '7px', width: '85%', fontFamily: 'poppins', color: 'white' }}>Alert</Button>
+                    </Grid>
+                    <Grid item style={{ display: 'flex', width: '100%' }}>
+                        <Button className='alertBtn' style={{ width: '100%', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '3px solid #E72222', color: 'white', backgroundColor: 'rgba(231, 34, 34, 0.63)' }}>ALERT</Button>
                     </Grid>
                 </Grid>
-                <Grid item xs={9} sx={{ backgroundColor: '#F1F1F1', width: '100%', height: '100%' }}>
-                    <div style={{ width: '100%', height: '100%' }}>
-                        {/* <WrappedMap googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
-                loadingElement={<div style={{height:'100%'}}/>}
-                containerElement={<div style={{height:'100%'}}/>}
-                mapElement={<div style={{height:'100%'}}/>}
-                /> */}
-                        {/* <GMap /> */}
+                <Grid item xs={9} md={9} sx={{ backgroundColor: '#F1F1F1', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{ width: '90%', height: '90%' }}>
+                        <GMap />
                     </div>
                 </Grid>
             </Grid>
-            <AppBar sx={{ display: { xs: 'flex', md: 'none' }, backgroundColor:'transparent', boxShadow:'none',justifyContent:'space-between', padding:'2%' }}>
-                <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
+            <AppBar sx={{ display: { xs: 'flex', md: 'none' }, backgroundColor: 'transparent', boxShadow: 'none', justifyContent: 'space-between', padding: '2%' }}>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <IconButton size="large"
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2, color:'#E02768' }}
+                        sx={{ mr: 2, color: '#E02768' }}
                         onClick={toggleOpen}>
                         <MenuIcon />
                     </IconButton>

@@ -5,19 +5,21 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import ContactList from './pages/ContactList';
 import GMap from './pages/GMap';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
     <>
-      <ContactList />
-      {/* <Router>
+      {/* <Dashboard /> */}
+      <Router>
         <Routes>
           <Route exact path='/' element={<Splashpage />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/contactlist' element={<ContactList/>} />
+          <Route exact path='/contactlist' element={<ContactList />} />
+          <Route exact path='/dashboard' element={<Dashboard />} />
         </Routes>
-      </Router> */}
+      </Router>
     </>
   )
 
