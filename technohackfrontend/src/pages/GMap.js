@@ -30,7 +30,7 @@ function GMap() {
     return (
         <MapContainer
             center={center}
-            zoom={2}
+            zoom={14}
             style={{ width: '100%', height: '100%' }}
             ref={mapRef}
         >
