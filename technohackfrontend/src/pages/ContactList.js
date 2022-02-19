@@ -87,8 +87,7 @@ function ContactList() {
     };
 
 
-    const [fav, setFav] = useState(false)
-    const [list, setList] = useState({ name: '', relation: '', phonenumber: '', fav: fav });
+    const [list, setList] = useState({ name: '', relation: '', phonenumber: '' });
     const [people, setPeople] = useState([]);
     const [editSinglePerson, setEditSinglePerson] = useState('Add');
 
@@ -115,6 +114,7 @@ function ContactList() {
         setPeople(newList);
     }
 
+
     const editPerson = (id) => {
         setEditSinglePerson('Edit');
         const filteredPeople = people.filter(filterItem => filterItem.id !== id);
@@ -122,6 +122,26 @@ function ContactList() {
         console.log(selectedPeople);
         setList({ name: selectedPeople.name, relation: selectedPeople.relation, phonenumber: selectedPeople.phonenumber })
         setPeople(filteredPeople);
+    }
+
+    const postContactList = (e) => {
+        var myHeaders = new Headers();
+        myHeaders.append("name", list.name);
+        myHeaders.append("relation", list.relation);
+        myHeaders.append("phone_no", list.phonenumber);
+        myHeaders.append("fav", "false");
+        myHeaders.append("Authorization", "Basic KzkxNzUwNjE2MDc1NzpoYXJzaEAxMjM=");
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("http://safestree.herokuapp.com/api/guardians/", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
     return (
@@ -239,9 +259,7 @@ function ContactList() {
                                                 <StyledTableCell align="right">{singlePerson.phonenumber}</StyledTableCell>
                                                 <StyledTableCell align="right">
                                                     <Grid container style={{ display: 'flex', columnGap: '2%', justifyContent: 'flex-end' }}>
-                                                        <Grid item>
-                                                            {fav ? <StarIcon onClick={() => setFav(false)} style={{ color: '#F9CC01', cursor: 'pointer' }} /> : <StarBorderIcon onClick={() => setFav(true)} style={{ color: '#F9CC01', cursor: 'pointer' }} />}
-                                                        </Grid>
+
                                                         <Grid item>
                                                             <DeleteIcon style={{ cursor: 'pointer', color: '#B5DD43' }} onClick={() => deletePerson(singlePerson.id)} />
                                                         </Grid>
@@ -255,6 +273,7 @@ function ContactList() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
+                            <h5 style={{ textAlign: 'right', color: '#E02768', cursor: 'pointer' }} onClick={postContactList}>Confirm & Proceed</h5>
                         </CardContent>
                     </Card>
                 </div>

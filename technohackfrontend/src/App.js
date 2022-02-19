@@ -9,11 +9,14 @@ import GMap from './pages/GMap';
 import Dashboard from './pages/Dashboard';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
+import SafetySpots from './pages/SafetySpots';
+import News from './pages/News';
 
 function App() {
 
   return (
     <>
+
       <Router>
         <Routes>
           <Route exact path='/' element={<Splashpage />} />
@@ -21,6 +24,7 @@ function App() {
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/contactlist' element={<ContactList />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/news' element={<News />} />
         </Routes>
       </Router>
     </>

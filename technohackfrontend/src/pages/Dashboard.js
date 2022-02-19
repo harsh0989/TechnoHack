@@ -11,6 +11,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import GMap from './GMap'
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router'
+import 'leaflet/dist/leaflet.css';
+
 
 const Dashboard = () => {
 
