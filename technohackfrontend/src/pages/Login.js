@@ -22,6 +22,7 @@ const Login = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [list, setList] = useState({ number: '', password: '' });
   const [first_name, setFirstName] = useState('');
+  const [personCreds, setPersonCreds] = useState({})
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -51,6 +52,7 @@ localStorage.setItem('phone_no',list.number)
           if (result.first_name) {
             setFirstName(result.first_name)
             navigate('/dashboard')
+            setPersonCreds({ first_name, ...list })
           }
           else {
             navigate('/login')
@@ -169,7 +171,7 @@ localStorage.setItem('phone_no',list.number)
                 <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Don't have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }} onClick={() => navigate('/signup')}>Sign Up</span></p>
               </Grid>
               <Grid item style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }} onClick={handleSubmit}>Sign In</Button>
+                <Link to={'/contactlist'} style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', width: '100%', fontSize: '1.1em', display: 'flex', justifyContent: 'center', alignItems: 'center' }} state={personCreds} onClick={handleSubmit}>Sign In</Link>
               </Grid>
             </Grid>
           </Grid>

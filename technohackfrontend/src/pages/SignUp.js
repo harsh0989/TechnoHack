@@ -48,7 +48,7 @@ function SignUp() {
             .then(result => {
                 console.log(result);
                 if (result.first_name) {
-                    navigate('/login')
+                    navigate('/contactlist')
                 }
             })
             .catch(error => console.log('error', error));
