@@ -9,7 +9,7 @@ import GMap from './pages/GMap';
 import Dashboard from './pages/Dashboard';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
-import GuardiansTracker from './pages/GuardiansTracker'
+import SafetySpots from './pages/SafetySpots';
 import News from './pages/News';
 import AuditForm from './pages/AuditForm';
 import SafetySpots from './pages/SafetySpots';
@@ -18,6 +18,7 @@ function App() {
 
   return (
     <>
+
       <Router>
         <Routes>
           <Route exact path='/' element={<Splashpage />} />
@@ -31,6 +32,7 @@ function App() {
         </Routes>
       </Router>
       {/* <GuardiansTracker/> */}
+
 
     </>
   )
