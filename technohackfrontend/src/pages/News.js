@@ -5,21 +5,17 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
-import Redirect from 'react-router-dom'
 import DashboardComp from '../components/DashboardComp'
-import Navbar from '../components/Navbar';
+import Navbar2 from '../components/Navbar2';
 
 function News() {
 
   // const theme = useTheme();
-
+  const [token, setToken] = useState('')
   const [news, setNews] = useState([]);
   useEffect(() => {
+    setToken(localStorage.getItem('token'));
     var requestOptions = {
       method: 'GET',
     };
@@ -28,12 +24,12 @@ function News() {
       .then(response => response.json())
       .then(result => {
         setNews(result.articles)
-        console.log(news);
       })
   }, [])
+  console.log(token);
   return (
     <>
-      <DashboardComp color={'#E02768'} />
+      {token ? <DashboardComp color={'#E02768'} /> : <Navbar2 color={'#E02768'} />}
       <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
         {

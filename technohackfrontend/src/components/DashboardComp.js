@@ -15,6 +15,7 @@ import icon3 from '../images/News.png'
 import icon4 from '../images/Safe.png'
 import icon5 from '../images/fakeCall.png'
 import icon6 from '../images/dashboard.png'
+import icon7 from '../images/logout.png'
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import logo3 from '../images/logo3.png'
@@ -110,6 +111,12 @@ export default function Dashboard(props) {
             <img src={icon5} />
           </ListItemIcon>
           <ListItemText primary='Fake Call' />
+        </ListItem>
+        <ListItem button key='logout' onClick={() => { localStorage.removeItem('token'); navigate(`/`) }} style={{ marginBottom: '8px' }}>
+          <ListItemIcon>
+            <img src={icon7} />
+          </ListItemIcon>
+          <ListItemText primary='Logout' />
         </ListItem>
       </List>
     </Box>

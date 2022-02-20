@@ -82,7 +82,8 @@ const Login = () => {
                 <p style={{ textAlign: 'center', fontSize: '0.89rem', color: '#1F2128' }}>Don't have an account? <span style={{ cursor: 'pointer', color: '#E02768', fontWeight: 'bold' }} onClick={() => navigate('/signup')}>Sign Up</span></p>
               </Grid>
               <Grid item style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Link to={'/contactlist'} style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', width: '100%', fontSize: '1.1em', display: 'flex', justifyContent: 'center', alignItems: 'center' }} state={personCreds} onClick={handleSubmit}>Sign In</Link>
+                {/* <Link to={'/contactlist'} style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', width: '100%', fontSize: '1.1em', display: 'flex', justifyContent: 'center', alignItems: 'center' }} state={personCreds} onClick={handleSubmit}>Sign In</Link> */}
+                <Button style={{ width: '50%', marginTop: '2%', background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', color: 'white', fontWeight: '600', fontSize: '1.1em' }} onClick={handleSubmit}>Sign In</Button>
               </Grid>
             </Grid>
           </Grid>
