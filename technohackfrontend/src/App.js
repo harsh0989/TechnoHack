@@ -11,6 +11,8 @@ import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router';
 import GuardiansTracker from './pages/GuardiansTracker'
 import News from './pages/News';
+import AuditForm from './pages/AuditForm';
+import SafetySpots from './pages/SafetySpots';
 
 function App() {
 
@@ -23,7 +25,9 @@ function App() {
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/contactlist' element={<ContactList />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/news' element={<News />}/>
+          <Route path='/news' element={<News />} />
+          <Route path='/auditform' element={<AuditForm />} />
+          <Route path='/safetyspots' element={<SafetySpots/>} />
         </Routes>
       </Router>
       {/* <GuardiansTracker/> */}

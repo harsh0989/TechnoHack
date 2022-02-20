@@ -13,10 +13,45 @@ import icon1 from '../images/SafetyAudit.png'
 import icon2 from '../images/Loc.png'
 import icon3 from '../images/News.png'
 import icon4 from '../images/Safe.png'
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
+
 export default function Dashboard() {
+  let navigate= useNavigate();
   const [state, setState] = React.useState({
     left: false
   });
+  let [value, setValue] = useState({ link: '', phone_no: '' })
+
+
+
+  const [show, setShow] = useState(false)
+  const shareLocation = () => {
+
+    console.log("first")
+    var axios = require('axios');
+    let data = { 'link': 'https://localhost:3000/tracker' }
+    console.log(data)
+    var config = {
+      method: 'post',
+      url: 'https://safestree.herokuapp.com/api/share-location',
+      headers: {
+        ...data.getHeaders()
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+  }
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -37,14 +72,34 @@ export default function Dashboard() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Safety Audit", "Share Location", "Daily News", "Nearby Safe Spots"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-                <img src={ index === 0 ? icon1 : index === 1 ? icon2 : index === 2 ? icon3 : icon4}/>
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key='Safety Audit' onClick={()=>navigate(`/auditform`)}>
+          <ListItemIcon>
+            <img src={icon1} />
+          </ListItemIcon>
+          <ListItemText primary='Safety Audit' />
+        </ListItem>
+        <ListItem button key='Share Location' onClick={shareLocation}>
+          <ListItemIcon>
+            <img src={icon2} />
+          </ListItemIcon>
+          <ListItemText primary='Share Location' />
+        </ListItem>
+        <ListItem button key='Daily News' onClick={()=>navigate(`/news`)}>
+          <ListItemIcon>
+            <img src={icon3} />
+          </ListItemIcon>
+          <ListItemText primary='Daily News' />
+        </ListItem>
+        <ListItem button key='Nearby Safe Spots'>
+          <ListItemIcon>
+            <img src={icon4} />
+          </ListItemIcon>
+          <ListItemText primary='Nearby Safe Spots' />
+        </ListItem>
+        <ListItem button key='call' onClick={() => setShow(!show)}>
+          <ListItemText primary='Fake Call'  />
+          {show ? <p>Fake call has been initiated</p>:''}
+        </ListItem>
       </List>
     </Box>
   );
@@ -53,7 +108,7 @@ export default function Dashboard() {
     <div>
       {["left"].map((anchor) => (
         <React.Fragment>
-          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon/></Button>
+          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
           <Drawer
             anchor="left"
             open={state[anchor]}

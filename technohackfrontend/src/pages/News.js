@@ -11,6 +11,7 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import Redirect from 'react-router-dom'
+import DashboardComp from '../components/DashboardComp'
 
 function News() {
   const theme = useTheme();
@@ -30,13 +31,14 @@ function News() {
   }, [])
   return (
     <>
+    <DashboardComp/>
       <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
         {
           news.map((article) => {
             return <>
-              <Grid spacing={6} item md={6}>
-                <Card sx={{ display: 'flex' }}>
+              <Grid spacing={6} item md={6} sx={{display:'flex', justifyContent:'center', alignItems:'center', marginBottom:'5%', padding:'20px'}}>
+                <Card sx={{ display: 'flex', width:'450px', justifyContent:'center', alignItems:'center',height:'200px' , padding:'20px'}}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                       <Typography component="div" variant="h5">
@@ -53,7 +55,7 @@ function News() {
                   </Box>
                   <CardMedia
                     component="img"
-                    sx={{ width: 151 }}
+                    sx={{ width: '150px' }}
                     image={article.urlToImage}
                     style={{ width: '150px', height: '150px', borderRadius: '3.5px' }}
                     alt="Live from space album cover"
