@@ -13,12 +13,15 @@ import icon1 from '../images/SafetyAudit.png'
 import icon2 from '../images/Loc.png'
 import icon3 from '../images/News.png'
 import icon4 from '../images/Safe.png'
+import icon5 from '../images/fakeCall.png'
+import icon6 from '../images/dashboard.png'
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import logo3 from '../images/logo3.png'
+import logo2 from '../images/logo2.png'
 
-
-export default function Dashboard() {
-  let navigate= useNavigate();
+export default function Dashboard(props) {
+  let navigate = useNavigate();
   const [state, setState] = React.useState({
     left: false
   });
@@ -72,43 +75,51 @@ export default function Dashboard() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button key='Safety Audit' onClick={()=>navigate(`/auditform`)}>
+        <ListItem button key='Dashboard' onClick={() => navigate(`/dashboard`)} style={{ marginBottom: '8px' }}>
+          <ListItemIcon>
+            <img src={icon6} />
+          </ListItemIcon>
+          <ListItemText primary='Dashboard' />
+        </ListItem>
+        <ListItem button key='Safety Audit' onClick={() => navigate(`/auditform`)} style={{ marginBottom: '8px' }}>
           <ListItemIcon>
             <img src={icon1} />
           </ListItemIcon>
           <ListItemText primary='Safety Audit' />
         </ListItem>
-        <ListItem button key='Share Location' onClick={shareLocation}>
+        <ListItem button key='Share Location' onClick={shareLocation} style={{ marginBottom: '8px' }}>
           <ListItemIcon>
             <img src={icon2} />
           </ListItemIcon>
           <ListItemText primary='Share Location' />
         </ListItem>
-        <ListItem button key='Daily News' onClick={()=>navigate(`/news`)}>
+        <ListItem button key='Daily News' onClick={() => navigate(`/news`)} style={{ marginBottom: '8px' }}>
           <ListItemIcon>
             <img src={icon3} />
           </ListItemIcon>
           <ListItemText primary='Daily News' />
         </ListItem>
-        <ListItem button key='Nearby Safe Spots'>
+        <ListItem button key='Nearby Safe Spots' style={{ marginBottom: '8px' }}>
           <ListItemIcon>
             <img src={icon4} />
           </ListItemIcon>
           <ListItemText primary='Nearby Safe Spots' />
         </ListItem>
-        <ListItem button key='call' onClick={() => setShow(!show)}>
-          <ListItemText primary='Fake Call'  />
-          {show ? <p>Fake call has been initiated</p>:''}
+        <ListItem button key='call' onClick={() => navigate(`/fakecall`)} style={{ marginBottom: '8px' }}>
+          <ListItemIcon>
+            <img src={icon5} />
+          </ListItemIcon>
+          <ListItemText primary='Fake Call' />
         </ListItem>
       </List>
     </Box>
   );
 
   return (
-    <div>
+    <div style={props.color === '#E02768' ? { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2%' } : { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2%', position: 'absolute', zIndex: '10', width: '95%' }}>
       {["left"].map((anchor) => (
-        <React.Fragment>
-          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon /></Button>
+        <>
+          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon sx={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }} /></Button>
           <Drawer
             anchor="left"
             open={state[anchor]}
@@ -116,8 +127,9 @@ export default function Dashboard() {
           >
             {list(anchor)}
           </Drawer>
-        </React.Fragment>
+        </>
       ))}
+      <img src={props.color === '#E02768' ? logo3 : logo2} />
     </div>
   );
 }

@@ -1,24 +1,13 @@
 import { Button, Grid } from '@mui/material'
 import React, { useState } from 'react'
 import TextField from "@mui/material/TextField";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import MenuItem from '@mui/material/MenuItem';
-import logo from '../images/logo2.png'
 import { useNavigate } from 'react-router';
+import Navbar from '../components/Navbar';
 
 const pages = ['News', 'Nearby safe spots'];
 
 function SignUp() {
     const navigate = useNavigate()
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [list, setList] = useState({ first_name: '', last_name: '', phone_no: '', address: '', password: '', email: '' })
 
     const handleChange = (e) => {
@@ -29,6 +18,8 @@ function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const convert = `${list.phone_no}:${list.password}`
+        const token = btoa(convert);
         var formdata = new FormData();
         formdata.append("first_name", list.first_name);
         formdata.append("last_name", list.last_name);
@@ -46,7 +37,7 @@ function SignUp() {
         fetch("http://safestree.herokuapp.com/api/register/", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
+                localStorage.setItem('token', token)
                 if (result.first_name) {
                     navigate('/contactlist')
                 }
@@ -54,94 +45,9 @@ function SignUp() {
             .catch(error => console.log('error', error));
 
     }
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
     return (
         <>
-            <AppBar position="static" sx={{ position: 'absolute', zIndex: '10', backgroundColor: 'transparent', padding: '25px', boxShadow: 'none' }}>
-                <Container maxWidth="xl" sx={{ backgroundColor: 'transparent' }}>
-                    <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-                        >
-                            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
-                        </Typography>
-
-
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                        >
-                            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
-                        </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
+            <Navbar color={'white'} />
             <Grid container style={{ padding: '15px', width: '100vw', height: '100vh', position: 'relative' }}>
                 <Grid item style={{ background: 'linear-gradient(149.06deg, #E02768 5.36%, #C71C7A 85.52%)', width: '100%', height: '100%', borderRadius: '7px' }}>
                     <Grid container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100%' }}>

@@ -23,6 +23,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
+import Navbar from '../components/Navbar';
 
 const button = {
     marginLeft: '-1vw',
@@ -146,80 +147,10 @@ function ContactList() {
 
     return (
         <>
-            <AppBar position="static" sx={{ backgroundColor: 'transparent', padding: '25px', boxShadow: 'none', color: '#E02768' }}>
-                <Container maxWidth="xl" sx={{ backgroundColor: 'transparent' }}>
-                    <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, color: '#E02768' }}
-                        >
-                            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
-                        </Typography>
-
-
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleOpenNavMenu}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    display: { xs: 'block', md: 'none' },
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center" style={{ color: '#E02768' }}>{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-                        >
-                            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
-                        </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block', color: '#E02768' }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
+            <Navbar color={'#E02768'} />
             <div>
                 <div className="createList" style={{ width: '100vw', marginTop: '2%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <Card sx={{ width: '90vw', backgroundColor: 'white', padding: '2%' }}>
+                    <Card sx={{ width: '90vw', padding: '2%' }}>
                         <CardContent>
                             <p style={{ fontFamily: 'Readex Pro, sans-serif', fontWeight: '800', color: '#E02768', textAlign: 'center', fontSize: '1.5em' }}>Guardian  Contacts</p>
 
@@ -273,7 +204,7 @@ function ContactList() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            <h5 style={{ textAlign: 'right', color: '#E02768' }} onClick={postContactList}>Confirm & Proceed</h5>
+                            <h5 style={{ textAlign: 'right', color: '#E02768', cursor: 'pointer' }} onClick={postContactList}>Confirm & Proceed</h5>
                         </CardContent>
                     </Card>
                 </div>

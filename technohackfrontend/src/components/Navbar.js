@@ -9,11 +9,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import logo from '../images/logo2.png'
+import logo2 from '../images/logo2.png'
+import logo3 from '../images/logo3.png'
+import { useNavigate } from 'react-router';
 
 const pages = ['News', 'Nearby safe spots'];
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -32,17 +34,19 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const navigate = useNavigate();
+
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <AppBar position="static" sx={props.color === '#E02768' ? { zIndex: '10', backgroundColor: 'transparent', padding: '25px', boxShadow: 'none' } : { position: 'absolute', zIndex: '10', backgroundColor: 'transparent', padding: '25px', boxShadow: 'none' }}>
+      <Container maxWidth="xl" sx={{ backgroundColor: 'transparent' }}>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
+            <img src={props.color === '#E02768' ? logo3 : logo2} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
           </Typography>
 
 
@@ -55,7 +59,7 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon style={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -75,11 +79,12 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" onClick={() => { navigate('/news') }} style={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }}>News</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center" onClick={() => { navigate('/safetyspots') }} style={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }}>Nearby Safe Spots</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -88,18 +93,15 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            <img src={logo} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
+            <img src={props.color === '#E02768' ? logo3 : logo2} style={{ mr: 2, display: { xs: 'none', md: 'flex' } }}></img>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center" onClick={() => { navigate('/news') }} style={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }}>News</Typography>
+            </MenuItem>
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center" onClick={() => { navigate('/safetyspots') }} style={props.color === '#E02768' ? { color: '#E02768' } : { color: '#F1F1F1' }}>Nearby Safe Spots</Typography>
+            </MenuItem>
           </Box>
         </Toolbar>
       </Container>

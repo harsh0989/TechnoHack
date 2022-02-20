@@ -35,7 +35,7 @@ function GMap() {
             ref={mapRef}
         >
             <TileLayer
-                url='https://api.maptiler.com/maps/basic/%7Bz%7D/%7Bx%7D/%7By%7D.png?key=GCrOaQueIQ4AmML6iiTF'
+                url='https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GCrOaQueIQ4AmML6iiTF'
                 attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
             />
             <Marker position={center} icon={markerIcon}>
